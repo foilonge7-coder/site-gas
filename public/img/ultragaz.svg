@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 120" width="300" height="120">
+  <!-- Fundo laranja arredondado -->
+  <rect width="300" height="120" rx="16" fill="#FF6600"/>
+
+  <!-- Chama estilizada -->
+  <g transform="translate(22, 10)">
+    <path d="M30 90 C10 70 5 50 20 35 C18 50 28 55 32 45 C35 35 30 20 40 10 C42 25 48 30 50 22 C55 35 60 55 45 75 C55 65 58 50 52 40 C65 55 68 75 55 90 Z" fill="white" opacity="0.95"/>
+  </g>
+
+  <!-- Texto ULTRAGAZ -->
+  <text x="105" y="58" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="36" fill="white" letter-spacing="1">ULTRA</text>
+  <text x="105" y="95" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="36" fill="white" letter-spacing="1">GAZ</text>
+
+  <!-- Linha decorativa -->
+  <rect x="105" y="100" width="160" height="3" rx="2" fill="white" opacity="0.4"/>
+</svg>

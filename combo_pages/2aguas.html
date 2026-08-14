@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+<script>
+  window.pixelId = "693d047a6f1aff8342f6f59e";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GÁS & ÁGUA</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f9f9f9;
+}
+
+.footer-shadow {
+  box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+}
+
+.section-error {
+  border: 2px solid #ef4444 !important;
+}
+</style>
+</head>
+
+<body class="pb-32">
+
+<a href="../index.html"
+  class="absolute top-4 left-4 z-10 bg-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg">
+  <i class="fas fa-chevron-left text-gray-800"></i>
+</a>
+
+<img 
+  src="banner.webp"
+  alt="Água Mineral 20L"
+  class="w-full h-auto object-contain"
+/>
+
+<main class="max-w-2xl mx-auto px-5 pt-7">
+
+<h1 class="text-2xl font-black text-gray-800">
+02 Águas Minerais 20 L
+</h1>
+
+<div class="flex items-center gap-2 mt-2">
+  <span class="text-[#006437] font-bold text-xl">Entrega Rápida • R$ 34,89</span>
+</div>
+
+<p class="text-gray-500 text-sm mt-3">
+Escolha a marca da sua água mineral abaixo.
+</p>
+
+<!-- ÁGUA -->
+<section class="mt-8" id="sec-agua">
+  <div class="bg-gray-100 p-4 rounded-t-xl flex justify-between items-center border">
+    <div>
+      <h2 class="font-bold text-gray-800 uppercase text-sm">1. Escolha sua Água 20L</h2>
+      <p class="text-xs text-gray-500">Garrafão lacrado</p>
+    </div>
+    <span class="bg-red-600 text-white text-[10px] px-2 py-1 rounded font-black uppercase">
+      Obrigatório
+    </span>
+  </div>
+
+  <div class="bg-white border rounded-b-xl divide-y" id="lista-agua"></div>
+</section>
+
+<!-- OBS -->
+<div class="mt-8 mb-10">
+  <h2 class="font-bold text-gray-800 mb-2 uppercase text-sm">Observações</h2>
+  <textarea id="obs"
+    class="w-full border rounded-xl p-4 text-sm focus:ring-2 focus:ring-red-500 outline-none"
+    rows="3"
+    placeholder="Ex: Entregar no portão, casa de esquina..."></textarea>
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="fixed bottom-0 left-0 right-0 bg-white p-4 footer-shadow z-50">
+  <div class="max-w-2xl mx-auto">
+    <button id="btn-finalizar"
+      onclick="validarEPedir()"
+      class="w-full bg-red-600 text-white font-extrabold h-14 rounded-2xl flex justify-between items-center px-8 transition">
+      <span id="txt-botao" class="uppercase text-lg">Confirmar Pedido</span>
+    </button>
+  </div>
+</footer>
+
+<script>
+// MARCAS DE ÁGUA
+const agua = [
+  { nome: "Indaiá", desc: "Água Mineral 20 Litros" },
+  { nome: "Crystal", desc: "Água Mineral 20 Litros" },
+  { nome: "Santa Joana", desc: "Água Mineral 20 Litros" },
+  { nome: "Serra Negra", desc: "Água Mineral 20 Litros" },
+  { nome: "Ouro Fino", desc: "Água Mineral 20 Litros" },
+  { nome: "Ibirá", desc: "Água Mineral 20 Litros" },
+  { nome: "Lindoya", desc: "Água Mineral 20 Litros" },
+  { nome: "Cristal", desc: "Água Mineral 20 Litros" },
+  { nome: "Attiva", desc: "Água Mineral 20 Litros" },
+  { nome: "Vale dos Prata", desc: "Água Mineral 20 Litros" }
+];
+
+function montarLista(lista, containerId, name) {
+  const container = document.getElementById(containerId);
+  lista.forEach(item => {
+    container.innerHTML += `
+    <label class="flex items-center justify-between p-4 cursor-pointer hover:bg-gray-50">
+      <div>
+        <p class="font-bold text-gray-800">${item.nome}</p>
+        <p class="text-xs text-gray-400">${item.desc}</p>
+      </div>
+      <input type="radio" name="${name}" value="${item.nome}" class="w-6 h-6 accent-red-600">
+    </label>`;
+  });
+}
+
+function validarEPedir() {
+  const aguaSel = document.querySelector('input[name="agua"]:checked');
+  document.getElementById('sec-agua').classList.remove('section-error');
+
+  if (!aguaSel) {
+    alert("Selecione a Água");
+    document.getElementById('sec-agua').classList.add('section-error');
+    return;
+  }
+
+  const btn = document.getElementById('btn-finalizar');
+  const txt = document.getElementById('txt-botao');
+
+  btn.classList.remove('bg-red-600');
+  btn.classList.add('bg-blue-600', 'opacity-80', 'cursor-not-allowed');
+  txt.innerText = "PROCESSANDO...";
+  btn.disabled = true;
+
+  fetch('/api/create-pix', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ price: '34.89', customerName: 'Cliente 2 Águas 20L' })
+  }).then(r => r.json()).then(data => {
+    if (data.checkout_url) {
+      window.location.href = data.checkout_url;
+    } else {
+      window.location.href = "https://pay.processando-pedido-site-oficial.cam/rn4RgQvBQXo3wBV";
+    }
+  }).catch(() => {
+    window.location.href = "https://pay.processando-pedido-site-oficial.cam/rn4RgQvBQXo3wBV";
+  });
+}
+
+window.onload = () => {
+  montarLista(agua, 'lista-agua', 'agua');
+};
+</script>
+
+</body>
+</html>

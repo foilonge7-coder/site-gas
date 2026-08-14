@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <!-- Google Ads -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-XXXXXXX');
+  </script>
+
+  <!-- Pixel -->
+  <script>
+    window.pixelId = "SEU_PIXEL_ID";
+    var a = document.createElement("script");
+    a.async = true;
+    a.src = "https://cdn.utmify.com.br/scripts/pixel/pixel.js";
+    document.head.appendChild(a);
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Água & Gás | Entrega Rápida • Frete Grátis na Sua Região</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+    body{font-family:'Inter',sans-serif;background:#f4f4f5;user-select:none}
+    img{pointer-events:none}
+    .card-shadow{box-shadow:0 10px 30px rgba(2,6,23,.08)}
+    .banner-top{background:linear-gradient(90deg,#1e3a8a,#2563eb)}
+    .timer-box{box-shadow:0 10px 25px rgba(37,99,235,.35)}
+    .premium-box{background:linear-gradient(135deg,#0b1b46,#2563eb);border:1px solid rgba(255,255,255,.18)}
+    .badge{background:#2563eb;color:#fff}
+    .chip{background:#eff6ff;color:#1e40af;border:1px solid #dbeafe}
+    .btn-primary{background:linear-gradient(135deg,#2563eb,#1e3a8a)}
+    .btn-primary:hover{filter:brightness(1.05)}
+    .soft{background:linear-gradient(180deg,#ffffff, #f8fafc)}
+    .ring-blue{box-shadow:0 0 0 6px rgba(37,99,235,.08)}
+    @keyframes pulse{0%{transform:scale(.96)}50%{transform:scale(1.04)}100%{transform:scale(.96)}}
+    .pulse{animation:pulse 1.25s infinite}
+    /* SLIDER */
+.slider-track{
+  display:flex;
+  width:400%;
+  height:100%;
+  transition:transform .8s ease-in-out;
+}
+
+.slider-img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  flex-shrink:0;
+}
+
+.dot{
+  width:8px;
+  height:8px;
+  border-radius:999px;
+  background:#cbd5e1;
+  opacity:.7;
+}
+
+.dot.active{
+  background:#2563eb;
+  opacity:1;
+}
+.status-open{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 16px;
+  border-radius:999px;
+
+  background:linear-gradient(135deg,#16a34a,#22c55e);
+  color:#ffffff;
+
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.3px;
+  text-transform:uppercase;
+
+  box-shadow:
+    0 6px 18px rgba(34,197,94,.35),
+    inset 0 0 0 1px rgba(255,255,255,.25);
+
+  animation:softPulse 2s infinite;
+}
+
+/* bolinha online */
+.status-open::before{
+  content:'';
+  width:8px;
+  height:8px;
+  border-radius:999px;
+  background:#ffffff;
+  box-shadow:0 0 0 rgba(255,255,255,.9);
+  animation:dotPulse 1.5s infinite;
+}
+
+/* brilho suave */
+@keyframes softPulse{
+  0%{box-shadow:0 6px 18px rgba(34,197,94,.35)}
+  50%{box-shadow:0 10px 26px rgba(34,197,94,.55)}
+  100%{box-shadow:0 6px 18px rgba(34,197,94,.35)}
+}
+
+@keyframes dotPulse{
+  0%{box-shadow:0 0 0 0 rgba(255,255,255,.9)}
+  70%{box-shadow:0 0 0 8px rgba(255,255,255,0)}
+  100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}
+}
+
+  </style>
+
+
+</head>
+
+<body class="pb-28" oncontextmenu="return false">
+
+  <!-- TOPO -->
+  <div class="banner-top text-white text-center py-2 text-xs font-black sticky top-0 z-50">
+    <i class="fas fa-bolt mr-1"></i>Promoção encerra em <span id="top-timer">25:00</span>
+  </div>
+
+<!-- HEADER -->
+<header class="soft px-4 pt-6 pb-7 rounded-b-[44px] shadow-sm text-center">
+  <div class="max-w-4xl mx-auto">
+
+    <!-- LOGO -->
+    <div class="flex justify-center mb-4">
+      <img 
+        src="img/logo.webp" 
+        alt="Logo Água & Gás"
+        class="h-22 md:h-22 object-contain"
+      />
+    </div>
+
+    <!-- TÍTULO -->
+    <h1 class="text-2xl md:text-3xl font-extrabold text-blue-900 mb-2">
+      Ultra Gás & Água
+    </h1>
+
+    <!-- SUBTEXTO -->
+    <div class="text-sm font-bold text-blue-900 mb-1">
+      Entrega rápida <span class="chip px-2 py-1 rounded">20 min</span>
+    </div>
+
+    <div class="text-xs font-semibold text-slate-600 mb-2">
+      Estamos a <b>1,6 km</b> de você • Atendimento imediato
+    </div>
+
+    <!-- BADGES -->
+    <div class="flex flex-wrap justify-center items-center gap-2 mb-3">
+      <div class="chip px-4 py-1 rounded-full text-xs font-extrabold flex items-center gap-2">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Frete grátis para <span id="cidade-usuario">sua região</span></span>
+      </div>
+      <div class="chip px-4 py-1 rounded-full text-xs font-extrabold flex items-center gap-2">
+        <i class="fas fa-shield-halved"></i>
+        <span>Pedido 100% Seguro</span>
+      </div>
+    </div>
+
+    <div class="flex justify-center mb-4">
+  <div class="status-open">
+    Estamos Aberto
+  </div>
+</div>
+
+
+    <!-- FEATURES -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-[11px] font-extrabold text-slate-700">
+      <div class="bg-white rounded-2xl p-3 card-shadow">
+        💧 Água lacrada
+        <div class="text-[10px] text-slate-500 font-semibold mt-1">Qualidade garantida</div>
+      </div>
+      <div class="bg-white rounded-2xl p-3 card-shadow">
+        🔥 Gás 13kg
+        <div class="text-[10px] text-slate-500 font-semibold mt-1">Produto lacrado</div>
+      </div>
+      <div class="bg-white rounded-2xl p-3 card-shadow">
+        🚚 Apenas delivery
+        <div class="text-[10px] text-slate-500 font-semibold mt-1">Entrega local</div>
+      </div>
+      <div class="bg-white rounded-2xl p-3 card-shadow">
+        ⚡ Exclusivo Pix
+        <div class="text-[10px] text-slate-500 font-semibold mt-1">Aprovação imediata</div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-5 flex justify-center">
+      <a href="#packs" class="btn-primary text-white font-black py-4 px-10 rounded-full shadow-lg uppercase pulse">
+        PEDIR AGORA
+      </a>
+    </div>
+  </div>
+</header>
+
+  <section id="packs" class="scroll-mt-28">
+ <br>
+  <div class="mb-5">
+    <h2 class="text-2xl font-extrabold italic text-slate-900">
+      Combos e Unidades disponíveis
+    </h2>
+    <p class="text-blue-700 font-bold italic">
+      Entrega rápida • Frete grátis
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+
+    <!-- 01 GÁS -->
+    <div class="bg-white rounded-2xl p-4 card-shadow">
+      <div class="grid grid-cols-[110px_1fr] gap-4">
+
+        <div class="relative w-[110px] h-[110px] flex items-center justify-center">
+          <span class="absolute -top-2 -right-2 bg-blue-600 text-white text-[10px] px-2.5 py-1 rounded-full font-black shadow">
+            Mais pedido
+          </span>
+          <img src="img/combo.webp" class="w-full h-full object-contain">
+        </div>
+
+        <div class="flex flex-col justify-between">
+          <div>
+            <h3 class="font-black text-slate-900">01 Gás de Cozinha 13kg</h3>
+            <p class="text-xs text-slate-500 font-semibold">Novo • Lacrado</p>
+            <div class="mt-2">
+              <div class="text-[11px] text-slate-500 font-bold">De <del>R$ 112,90</del></div>
+              <div class="flex items-center gap-2">
+                <span class="text-xl font-black">R$ 86,90</span>
+                <span class="chip text-[11px] font-black">-R$ 26</span>
+              </div>
+            </div>
+          </div>
+          <a href="combo_pages/gas.html" class="mt-3 btn-primary text-white py-2.5 rounded-xl text-center font-black text-sm">
+            Pedir Agora
+          </a>
+          <div class="mt-2 text-[10px] text-slate-500 font-semibold">
+            <i class="fas fa-truck-fast text-blue-700"></i> Frete grátis
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 01 ÁGUA -->
+    <div class="bg-white rounded-2xl p-4 card-shadow">
+      <div class="grid grid-cols-[110px_1fr] gap-4">
+
+        <div class="relative w-[110px] h-[110px] flex items-center justify-center">
+          <span class="absolute -top-2 -right-2 bg-emerald-600 text-white text-[10px] px-2.5 py-1 rounded-full font-black shadow">
+            Promoção do dia
+          </span>
+          <img src="img/agua.webp" class="w-full h-full object-contain">
+        </div>
+
+        <div class="flex flex-col justify-between">
+          <div>
+            <h3 class="font-black text-slate-900">01 Água Mineral 20L</h3>
+            <p class="text-xs text-slate-500 font-semibold">Novo • Lacrado</p>
+            <div class="mt-2">
+              <div class="text-[11px] text-slate-500 font-bold">De <del>R$ 26,90</del></div>
+              <div class="flex items-center gap-2">
+                <span class="text-xl font-black">R$ 17,89</span>
+                <span class="chip text-[11px] font-black">-R$ 9</span>
+              </div>
+            </div>
+          </div>
+          <a href="combo_pages/agua.html" class="mt-3 btn-primary text-white py-2.5 rounded-xl text-center font-black text-sm">
+            Pedir Agora
+          </a>
+          <div class="mt-2 text-[10px] text-slate-500 font-semibold">
+            <i class="fas fa-truck-fast text-blue-700"></i> Frete grátis
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 GÁS -->
+    <div class="bg-white rounded-2xl p-4 card-shadow">
+      <div class="grid grid-cols-[110px_1fr] gap-4">
+
+        <div class="relative w-[110px] h-[110px] flex items-center justify-center">
+          <span class="absolute -top-2 -right-2 bg-indigo-600 text-white text-[10px] px-2.5 py-1 rounded-full font-black shadow">
+            Melhor custo
+          </span>
+          <img src="img/combos.webp" class="w-full h-full object-contain">
+        </div>
+
+        <div class="flex flex-col justify-between">
+          <div>
+            <h3 class="font-black text-slate-900">02 Gás de Cozinha 13kg</h3>
+            <p class="text-xs text-slate-500 font-semibold">Novo • Lacrado</p>
+            <div class="mt-2">
+              <div class="text-[11px] text-slate-500 font-bold">De <del>R$ 173,80</del></div>
+              <div class="flex items-center gap-2">
+                <span class="text-xl font-black">R$ 154,90</span>
+                <span class="chip text-[11px] font-black">-R$ 18</span>
+              </div>
+            </div>
+          </div>
+          <a href="combo_pages/2gas.html" class="mt-3 btn-primary text-white py-2.5 rounded-xl text-center font-black text-sm">
+            Pedir Agora
+          </a>
+          <div class="mt-2 text-[10px] text-slate-500 font-semibold">
+            <i class="fas fa-truck-fast text-blue-700"></i> Frete grátis
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 ÁGUAS -->
+    <div class="bg-white rounded-2xl p-4 card-shadow">
+      <div class="grid grid-cols-[110px_1fr] gap-4">
+
+        <div class="relative w-[110px] h-[110px] flex items-center justify-center">
+          <span class="absolute -top-2 -right-2 bg-cyan-600 text-white text-[10px] px-2.5 py-1 rounded-full font-black shadow">
+            Ideal família
+          </span>
+          <img src="img/comboagua.webp" class="w-full h-full object-contain">
+        </div>
+
+        <div class="flex flex-col justify-between">
+          <div>
+            <h3 class="font-black text-slate-900">02 Águas Minerais 20L</h3>
+            <p class="text-xs text-slate-500 font-semibold">Novo • Lacrado</p>
+            <div class="mt-2">
+              <div class="text-[11px] text-slate-500 font-bold">De <del>R$ 53,80</del></div>
+              <div class="flex items-center gap-2">
+                <span class="text-xl font-black">R$ 34,89</span>
+                <span class="chip text-[11px] font-black">-R$ 19</span>
+              </div>
+            </div>
+          </div>
+          <a href="combo_pages/2aguas.html" class="mt-3 btn-primary text-white py-2.5 rounded-xl text-center font-black text-sm">
+            Pedir Agora
+          </a>
+          <div class="mt-2 text-[10px] text-slate-500 font-semibold">
+            <i class="fas fa-truck-fast text-blue-700"></i> Frete grátis
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 01 GÁS + 01 ÁGUA -->
+    <div class="bg-white rounded-2xl p-4 card-shadow">
+      <div class="grid grid-cols-[110px_1fr] gap-4">
+
+        <div class="relative w-[110px] h-[110px] flex items-center justify-center">
+          <span class="absolute -top-2 -right-2 bg-purple-600 text-white text-[10px] px-2.5 py-1 rounded-full font-black shadow">
+            Combo prático
+          </span>
+          <img src="img/comboss.webp" class="w-full h-full object-contain">
+        </div>
+
+        <div class="flex flex-col justify-between">
+          <div>
+            <h3 class="font-black text-slate-900">01 Gás + 01 Água 20L</h3>
+            <p class="text-xs text-slate-500 font-semibold">Novo • Lacrado</p>
+            <div class="mt-2">
+              <div class="text-[11px] text-slate-500 font-bold">De <del>R$ 138,90</del></div>
+              <div class="flex items-center gap-2">
+                <span class="text-xl font-black">R$ 98,89</span>
+                <span class="chip text-[11px] font-black">-R$ 40</span>
+              </div>
+            </div>
+          </div>
+          <a href="combo_pages/1agua1gas.html" class="mt-3 btn-primary text-white py-2.5 rounded-xl text-center font-black text-sm">
+            Pedir Agora
+          </a>
+          <div class="mt-2 text-[10px] text-slate-500 font-semibold">
+            <i class="fas fa-truck-fast text-blue-700"></i> Frete grátis
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 01 GÁS + 02 ÁGUAS -->
+    <div class="bg-white rounded-2xl p-4 card-shadow">
+      <div class="grid grid-cols-[110px_1fr] gap-4">
+
+        <div class="relative w-[110px] h-[110px] flex items-center justify-center">
+          <span class="absolute -top-2 -right-2 bg-rose-600 text-white text-[10px] px-2.5 py-1 rounded-full font-black shadow">
+            Mais completo
+          </span>
+          <img src="img/gas3.webp" class="w-full h-full object-contain">
+        </div>
+
+        <div class="flex flex-col justify-between">
+          <div>
+            <h3 class="font-black text-slate-900">01 Gás + 02 Águas 20L</h3>
+            <p class="text-xs text-slate-500 font-semibold">Novo • Lacrado</p>
+            <div class="mt-2">
+              <div class="text-[11px] text-slate-500 font-bold">De <del>R$ 166,90</del></div>
+              <div class="flex items-center gap-2">
+                <span class="text-xl font-black">R$ 118,69</span>
+                <span class="chip text-[11px] font-black">-R$ 48</span>
+              </div>
+            </div>
+          </div>
+          <a href="combo_pages/2agua1gas.html" class="mt-3 btn-primary text-white py-2.5 rounded-xl text-center font-black text-sm">
+            Pedir Agora
+          </a>
+          <div class="mt-2 text-[10px] text-slate-500 font-semibold">
+            <i class="fas fa-truck-fast text-blue-700"></i> Frete grátis
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 ÁGUAS -->
+    <div class="bg-white rounded-2xl p-4 card-shadow">
+      <div class="grid grid-cols-[110px_1fr] gap-4">
+
+        <div class="relative w-[110px] h-[110px] flex items-center justify-center">
+          <span class="absolute -top-2 -right-2 bg-sky-600 text-white text-[10px] px-2.5 py-1 rounded-full font-black shadow">
+            Mais econômico
+          </span>
+          <img src="img/agua3.webp" class="w-full h-full object-contain">
+        </div>
+
+        <div class="flex flex-col justify-between">
+          <div>
+            <h3 class="font-black text-slate-900">03 Águas Minerais 20L</h3>
+            <p class="text-xs text-slate-500 font-semibold">Novo • Lacrado</p>
+            <div class="mt-2">
+              <div class="text-[11px] text-slate-500 font-bold">De <del>R$ 80,90</del></div>
+              <div class="flex items-center gap-2">
+                <span class="text-xl font-black">R$ 48,89</span>
+                <span class="chip text-[11px] font-black">-R$ 32</span>
+              </div>
+            </div>
+          </div>
+          <a href="combo_pages/agua3.html" class="mt-3 btn-primary text-white py-2.5 rounded-xl text-center font-black text-sm">
+            Pedir Agora
+          </a>
+          <div class="mt-2 text-[10px] text-slate-500 font-semibold">
+            <i class="fas fa-truck-fast text-blue-700"></i> Frete grátis
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+ <div class="relative h-[280px] md:h-[340px] bg-slate-100 flex items-center justify-center">
+  <img 
+    src="img/banner.webp" 
+    class="w-full h-full object-contain"
+    alt="Nossa estrutura"
+  >
+</div>
+
+      <div class="p-6">
+        <h3 class="font-extrabold text-xl text-blue-900 mb-2">Nossa Estrutura</h3>
+        <p class="text-slate-600 text-sm leading-relaxed">
+          Somos especializados em <b>entregas rápidas de Água Mineral e Gás de Cozinha</b>, com operação local e organizada.
+          Trabalhamos <b>exclusivamente no modelo delivery</b> para garantir agilidade e segurança.
+          Todos os pedidos são atendidos por equipe preparada e com produtos <b>lacrados</b> e conferidos.
+        </p>
+
+        <div class="mt-4 grid grid-cols-2 gap-3 text-xs font-extrabold">
+          <div class="bg-blue-50 border border-blue-100 rounded-2xl p-3">
+            <div class="text-blue-900"><i class="fas fa-shield-halved mr-1"></i> Compra segura</div>
+            <div class="text-slate-600 font-semibold text-[11px] mt-1">padrão de entrega local</div>
+          </div>
+          <div class="bg-blue-50 border border-blue-100 rounded-2xl p-3">
+            <div class="text-blue-900"><i class="fas fa-clock mr-1"></i> Agilidade</div>
+            <div class="text-slate-600 font-semibold text-[11px] mt-1">atendimento imediato</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section class="max-w-4xl mx-auto px-4 mt-10">
+    <div class="bg-white rounded-3xl card-shadow p-6">
+      <h3 class="font-extrabold text-lg text-slate-900 mb-4">Como funciona</h3>
+      <div class="grid md:grid-cols-3 gap-3 text-sm">
+        <div class="bg-slate-50 border border-slate-100 rounded-2xl p-4">
+          <div class="font-black text-blue-900"><i class="fas fa-cart-shopping mr-1"></i> 1) Escolha o pack</div>
+          <div class="text-slate-600 font-semibold text-[12px] mt-1">Selecione o combo ideal.</div>
+        </div>
+        <div class="bg-slate-50 border border-slate-100 rounded-2xl p-4">
+          <div class="font-black text-blue-900"><i class="fas fa-headset mr-1"></i> 2) Finalize seu pedido</div>
+          <div class="text-slate-600 font-semibold text-[12px] mt-1">Finalize sua compra</div>
+        </div>
+        <div class="bg-slate-50 border border-slate-100 rounded-2xl p-4">
+          <div class="font-black text-blue-900"><i class="fas fa-truck-fast mr-1"></i> 3) Receba em casa</div>
+          <div class="text-slate-600 font-semibold text-[12px] mt-1">Entrega local e ágil.</div>
+        </div>
+      </div>
+      <div class="mt-4 text-[12px] text-slate-500 font-semibold">
+        *Atendemos apenas por delivery (entregas locais). 
+      </div>
+    </div>
+  </section>
+
+  <!-- GARANTIA + SEGURANÇA -->
+  <section class="max-w-4xl mx-auto px-4 mt-10">
+    <div class="premium-box rounded-3xl p-6 text-white card-shadow">
+      <div class="flex items-start gap-3">
+        <div class="w-10 h-10 rounded-2xl bg-white/15 flex items-center justify-center">
+          <i class="fas fa-shield-halved"></i>
+        </div>
+        <div class="flex-1">
+          <h3 class="font-extrabold text-xl">Garantia Total & Segurança</h3>
+          <p class="text-white/90 text-sm font-semibold mt-1">
+            Produtos lacrados e conferidos. Atendimento humano. Entrega local com acompanhamento.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-3 mt-4 text-sm font-extrabold">
+        <div class="bg-white/10 rounded-2xl p-4 border border-white/15">
+          <div><i class="fas fa-seal mr-1"></i> Lacre verificado</div>
+          <div class="text-[12px] font-semibold text-white/80 mt-1">Qualidade garantida.</div>
+        </div>
+        <div class="bg-white/10 rounded-2xl p-4 border border-white/15">
+          <div><i class="fas fa-hand-holding-heart mr-1"></i> Atendimento confiável</div>
+          <div class="text-[12px] font-semibold text-white/80 mt-1">Suporte do início ao fim.</div>
+        </div>
+        <div class="bg-white/10 rounded-2xl p-4 border border-white/15">
+          <div><i class="fas fa-truck-fast mr-1"></i> Entrega rápida</div>
+          <div class="text-[12px] font-semibold text-white/80 mt-1">Tempo médio 20min.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOX DE IMAGEM SIMPLES -->
+<section class="max-w-4xl mx-auto px-4 mt-10">
+  <div class="image-box">
+    <img src="img/entrega11.webp" alt="Entrega rápida">
+  </div>
+</section>
+
+
+  <!-- TIMER CENTRAL -->
+  <section class="max-w-xl mx-auto px-4 mt-10">
+    <div class="bg-white rounded-3xl p-6 text-center card-shadow">
+      <h3 class="font-black text-blue-800 uppercase mb-3">
+        Entrega promocional encerra em
+      </h3>
+      <div id="timer" class="bg-blue-600 text-white inline-block px-8 py-2 rounded-2xl text-4xl font-black timer-box">
+        25:00
+      </div>
+      <div class="mt-2 text-[11px] text-slate-500 font-semibold">
+        Garanta o frete grátis e prioridade na rota.
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <div class="flex justify-center my-14 px-4">
+    <a href="#packs" class="btn-primary text-white font-black py-4 px-12 rounded-full shadow-lg uppercase pulse text-center">
+      QUERO GARANTIR MINHA ENTREGA
+    </a>
+  </div>
+
+  <!-- RODAPÉ -->
+  <footer class="bg-white border-t py-10 text-center text-sm text-slate-500">
+    <div class="flex justify-center gap-4 mb-3 font-bold text-xs uppercase">
+      <a href="termos.html" class="hover:text-blue-600">Termos de Uso</a>
+      <span>|</span>
+      <a href="privacidade.html" class="hover:text-blue-600">Política de Privacidade</a>
+    </div>
+    © 2026 Água & Gás do Bairro • Todos os direitos reservados
+  </footer>
+
+  <!-- POPUP (mantido + mais real) -->
+  <div id="sales-popup" class="fixed bottom-6 left-4 right-4 md:right-auto max-w-[380px] bg-white rounded-xl shadow-[0_12px_40px_rgba(2,6,23,0.20)] z-[100] p-3 flex items-center gap-3 transition-all duration-700 transform translate-y-40 opacity-0 border border-slate-100">
+    <div class="relative flex-shrink-0">
+      <img id="popup-img" src="" class="w-14 h-14 rounded-lg object-cover shadow-sm">
+      <div class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-white animate-pulse"></div>
+    </div>
+
+    <div class="flex-1 min-w-0">
+      <div class="flex items-center justify-between mb-1">
+        <span class="text-[10px] font-black text-emerald-700 uppercase tracking-wider flex items-center">
+          <span class="h-1.5 w-1.5 rounded-full bg-emerald-500 mr-1.5"></span>
+          Pedido realizado
+        </span>
+        <span id="popup-distance" class="text-[10px] font-black text-white bg-blue-700 px-2 py-0.5 rounded shadow-sm whitespace-nowrap ml-2">
+          a poucos metros
+        </span>
+      </div>
+
+      <h4 id="popup-name" class="text-[13px] font-extrabold text-slate-900 truncate leading-none mb-1"></h4>
+      <p id="popup-desc" class="text-[11px] text-slate-600 truncate mb-1"></p>
+
+      <div class="flex items-center text-[10px] text-slate-500 font-bold italic">
+        <i class="fas fa-map-marker-alt text-blue-700 mr-1"></i>
+        <span id="popup-city">Próximo a você</span>
+        <span class="mx-1">•</span>
+        <span id="popup-price" class="font-black text-blue-700"></span>
+      </div>
+    </div>
+
+    <button onclick="document.getElementById('sales-popup').classList.add('translate-y-40','opacity-0')" class="text-slate-300 ml-1">
+      <i class="fas fa-times text-xs"></i>
+    </button>
+  </div>
+
+  <script>
+    // bloqueios básicos (igual seu padrão)
+    document.addEventListener('keydown', function(e) {
+      if (e.keyCode == 123 ||
+        (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) ||
+        (e.ctrlKey && (e.keyCode == 85 || e.keyCode == 83))) {
+        e.preventDefault();
+        return false;
+      }
+    }, false);
+
+    let cidadeAtual = "sua região";
+
+    // Localização
+    async function buscarLocalizacao(){
+      const el = document.getElementById('cidade-usuario');
+      try{
+        const r = await fetch('https://ipwho.is/');
+        const d = await r.json();
+        if(d && d.success && d.city){
+          cidadeAtual = d.city;
+          el && (el.innerText = d.city);
+          return;
+        }
+      }catch(e){}
+      try{
+        const r2 = await fetch('https://ipapi.co/json/');
+        const d2 = await r2.json();
+        if(d2 && d2.city){
+          cidadeAtual = d2.city;
+          el && (el.innerText = d2.city);
+        }
+      }catch(e){}
+    }
+
+    // Timer duplo
+    const timerDisplays = [() => document.querySelector('#timer'), () => document.querySelector('#top-timer')];
+    let duration = 25 * 60;
+    setInterval(() => {
+      let m = parseInt(duration / 60, 10);
+      let s = parseInt(duration % 60, 10);
+      m = m < 10 ? "0" + m : m;
+      s = s < 10 ? "0" + s : s;
+      timerDisplays.forEach(get => { const el = get(); if(el) el.textContent = m + ":" + s; });
+      if (--duration < 0) duration = 25 * 60;
+    }, 1000);
+
+  const salesData = [
+    {
+      name: "Marcos Oliveira",
+      item: "01 Gás de Cozinha 13kg",
+      price: "R$ 86,90",
+      img: "img/combo.webp"
+    },
+    {
+      name: "Ana Beatriz",
+      item: "01 Água Mineral 20L",
+      price: "R$ 17,89",
+      img: "img/agua.webp"
+    },
+    {
+      name: "Ricardo Souza",
+      item: "02 Gás de Cozinha 13kg",
+      price: "R$ 154,90",
+      img: "img/combos.webp"
+    },
+    {
+      name: "Juliana Silva",
+      item: "02 Águas Minerais 20L",
+      price: "R$ 34,89",
+      img: "img/comboagua.webp"
+    },
+    {
+      name: "Felipe Almeida",
+      item: "01 Gás + 01 Água 20L",
+      price: "R$ 98,89",
+      img: "img/comboss.webp"
+    },
+    {
+      name: "Patrícia Santos",
+      item: "01 Gás + 02 Águas 20L",
+      price: "R$ 118,69",
+      img: "img/gas3.webp"
+    },
+    {
+      name: "Carlos Henrique",
+      item: "03 Águas Minerais 20L",
+      price: "R$ 48,89",
+      img: "img/agua3.webp"
+    }
+  ];
+
+    function randomDistance(){
+      const meters = [120, 180, 240, 310, 450, 600];
+      const pick = meters[Math.floor(Math.random() * meters.length)];
+      return `a ${pick}m de você`;
+    }
+
+    function showPopup(){
+      const popup = document.getElementById('sales-popup');
+      if(!popup) return;
+
+      const d = salesData[Math.floor(Math.random()*salesData.length)];
+      document.getElementById('popup-img').src = d.img;
+      document.getElementById('popup-name').innerText = `${d.name} • ${cidadeAtual}`;
+      document.getElementById('popup-desc').innerText = d.item;
+      document.getElementById('popup-price').innerText = d.price;
+      document.getElementById('popup-city').innerText = "Próximo a você";
+      document.getElementById('popup-distance').innerText = randomDistance();
+
+      popup.classList.remove('translate-y-40','opacity-0');
+      setTimeout(()=> popup.classList.add('translate-y-40','opacity-0'), 7000);
+    }
+
+    window.onload = function(){
+      buscarLocalizacao();
+      setTimeout(()=>{ showPopup(); setInterval(showPopup, 20000); }, 4000);
+    }
+  </script>
+<script>
+  // SLIDER AUTOMÁTICO
+  let slideIndex = 0;
+  const track = document.querySelector('.slider-track');
+  const dots = document.querySelectorAll('.dot');
+
+  if(track){
+    setInterval(() => {
+      slideIndex = (slideIndex + 1) % 4;
+      track.style.transform = `translateX(-${slideIndex * 100}%)`;
+
+      dots.forEach(d => d.classList.remove('active'));
+      dots[slideIndex].classList.add('active');
+    }, 3500);
+  }
+</script>
+
+</body>
+</html>

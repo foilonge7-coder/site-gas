@@ -1,0 +1,6 @@
+{
+  "name": "Água & Gás Delivery",
+  "description": "Distribuidora de água mineral e gás de cozinha com entrega rápida e frete grátis.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
