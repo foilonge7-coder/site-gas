@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ComboProduct } from '../types';
 import { GAS_BRANDS, WATER_BRANDS } from '../data/products';
 
@@ -26,6 +26,10 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ product, onClose, 
   const [apiError, setApiError] = useState<string>('');
 
   const [isOrderComplete, setIsOrderComplete] = useState<boolean>(false);
+  const [isCheckoutCreated, setIsCheckoutCreated] = useState<boolean>(false);
+  const [transactionId, setTransactionId] = useState<string>('');
+  const [txStatus, setTxStatus] = useState<string>('');
+  const pollingRef = useRef<number | null>(null);
   const [pixCopied, setPixCopied] = useState<boolean>(false);
   const [dynamicPixCode, setDynamicPixCode] = useState<string>('');
   const [dynamicQrImage, setDynamicQrImage] = useState<string>('');
@@ -74,6 +78,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ product, onClose, 
       const checkoutUrl: string = data.checkout_url || '';
       const pixCode: string = data.pix_code || data.qrcode || '';
       const qrImg: string = data.qrcode_image || '';
+      const txId: string = data.transactionId || data.id || '';
 
       if (!checkoutUrl && !pixCode) {
         throw new Error('A Zuck Pay não retornou um link de pagamento. Verifique suas credenciais.');
@@ -82,11 +87,18 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ product, onClose, 
       setDynamicCheckoutUrl(checkoutUrl);
       setDynamicPixCode(pixCode);
       setDynamicQrImage(qrImg);
-      setIsOrderComplete(true);
+      if (txId) {
+        setTransactionId(txId);
+        setTxStatus('PENDING');
+        setIsCheckoutCreated(true);
+      } else {
+        // fallback: mark as created so UI shows QR/checkout
+        setIsCheckoutCreated(true);
+      }
 
-      // Redireciona para o checkout Zuck Pay na mesma aba
+      // Abra o checkout em nova aba (não redireciona), assim o modal pode aguardar confirmação
       if (checkoutUrl) {
-        window.location.href = checkoutUrl;
+        try { window.open(checkoutUrl, '_blank'); } catch (e) { /* ignore */ }
       }
     } catch (err: any) {
       console.error('[ZuckPay] Erro:', err);
@@ -122,7 +134,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ product, onClose, 
           <i className="fas fa-chevron-left"></i>
         </button>
 
-        {!isOrderComplete ? (
+        {!isCheckoutCreated && !isOrderComplete ? (
           <div>
             {/* HEADER DO PRODUTO */}
             <div className="relative bg-slate-50 p-6 pt-12 border-b border-slate-100 text-center">
@@ -280,7 +292,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ product, onClose, 
                   </span>
                 </div>
                 <p className="text-[11px] text-emerald-800 font-medium">
-                  Após confirmar, você será redirecionado para o checkout seguro da Zuck Pay.
+                  Após confirmar, você será redirecionado para o checkout seguro da PromissePay.
                 </p>
               </div>
 
@@ -321,7 +333,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ product, onClose, 
             </form>
           </div>
 
-        ) : (
+        ) : isOrderComplete ? (
           /* TELA DE PEDIDO CONFIRMADO */
           <div className="p-6 md:p-8 text-center space-y-5">
             <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl animate-bounce">
@@ -379,16 +391,84 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ product, onClose, 
               </div>
             </div>
 
-            {/* CHECKOUT ZUCK PAY */}
+            {/* CHECKOUT PROMISSEPAY */}
             <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 text-center space-y-3">
               <div className="text-xs font-extrabold text-emerald-900 uppercase flex items-center justify-center gap-1.5">
-                <i className="fas fa-shield-alt text-emerald-600 text-base"></i> Pagamento Seguro — Zuck Pay
+                <i className="fas fa-shield-alt text-emerald-600 text-base"></i> Pagamento Seguro — PromissePay
               </div>
 
               {dynamicCheckoutUrl && (
                 <a href={dynamicCheckoutUrl} target="_blank" rel="noopener noreferrer"
                   className="block bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-4 px-6 rounded-xl text-sm uppercase tracking-wider shadow-md transition-colors cursor-pointer">
                   <i className="fas fa-lock mr-2"></i> Clique Aqui para Pagar
+                </a>
+              )}
+
+              {dynamicQrImage && (
+                <div className="space-y-2 pt-1">
+                  <p className="text-[11px] text-slate-500">Ou escaneie o QR Code PIX:</p>
+                  <div className="flex justify-center">
+                    <img src={dynamicQrImage} alt="QR Code PIX" className="w-40 h-40 rounded-xl border border-emerald-200 shadow-sm object-contain" />
+                  </div>
+                </div>
+              )}
+
+              {dynamicPixCode && (
+                <div className="space-y-2">
+                  <div className="bg-white p-2 rounded-xl border border-emerald-200 text-[10px] font-mono text-slate-600 break-all select-all">
+                    {dynamicPixCode}
+                  </div>
+                  <button type="button" onClick={copyPix}
+                    className="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2 px-5 rounded-xl text-xs uppercase tracking-wider transition-colors cursor-pointer">
+                    {pixCopied ? 'Copiado! ✓' : 'Copiar Código PIX'}
+                  </button>
+                </div>
+              )}
+            </div>
+
+            <button onClick={onClose}
+              className="w-full bg-blue-700 hover:bg-blue-800 text-white font-extrabold py-3.5 rounded-xl text-sm uppercase tracking-wider shadow-md transition-colors cursor-pointer">
+              Voltar à Loja
+            </button>
+          </div>
+        ) : (
+          /* TELA DE AGUARDANDO PAGAMENTO */
+          <div className="p-6 md:p-8 text-center space-y-5">
+            <div className="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto text-2xl animate-pulse">
+              <i className="fas fa-hourglass-half"></i>
+            </div>
+
+            <div>
+              <span className="bg-amber-100 text-amber-800 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
+                Aguardando Confirmação de Pagamento
+              </span>
+              <h2 className="text-2xl font-black text-slate-900 mt-2">Seu pedido está sendo processado</h2>
+              <p className="text-slate-600 text-sm mt-1">
+                Não iremos preparar a entrega até o pagamento ser confirmado. Aguarde a confirmação automática.
+              </p>
+            </div>
+
+            {/* RESUMO */}
+            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-left text-xs space-y-2">
+              <div className="flex justify-between font-bold border-b border-slate-200 pb-2 text-slate-800">
+                <span>Produto:</span><span>{product.title}</span>
+              </div>
+              <div className="flex justify-between text-slate-600">
+                <span>Pagamento:</span>
+                <span className="font-bold text-emerald-700">{paymentLabel} • {txStatus || 'PENDING'}</span>
+              </div>
+              <div className="flex justify-between font-black text-sm text-slate-900 border-t border-slate-200 pt-2">
+                <span>Total a Pagar:</span>
+                <span className="text-blue-700">{product.currentPrice}</span>
+              </div>
+            </div>
+
+            {/* CHECKOUT / QR */}
+            <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 text-center space-y-3">
+              {dynamicCheckoutUrl && (
+                <a href={dynamicCheckoutUrl} target="_blank" rel="noopener noreferrer"
+                  className="block bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-4 px-6 rounded-xl text-sm uppercase tracking-wider shadow-md transition-colors cursor-pointer">
+                  <i className="fas fa-lock mr-2"></i> Abrir Checkout (nova aba)
                 </a>
               )}
 

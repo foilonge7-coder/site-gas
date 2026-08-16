@@ -9,6 +9,17 @@
   status = 200
 
 [[redirects]]
+  from = "/api/zuck-webhook"
+  to = "/.netlify/functions/zuck-webhook"
+  status = 200
+  methods = ["POST", "OPTIONS"]
+
+[[redirects]]
+  from = "/api/tx/:id"
+  to = "/.netlify/functions/tx?id=:id"
+  status = 200
+
+[[redirects]]
   from   = "/*"
   to     = "/index.html"
   status = 200

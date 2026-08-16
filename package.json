@@ -8,6 +8,8 @@
     "build": "vite build",
     "start": "node server.js",
     "preview": "vite preview",
+    "test:payments": "node tests/promissepay-tests.js",
+    "test:full": "node tests/full-checkout-flow.cjs",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit"
   },
