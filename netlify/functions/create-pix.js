@@ -29,10 +29,15 @@ export async function handler(event) {
     const clientId     = process.env.ZUCK_CLIENT_ID || '';
     const clientSecret = process.env.ZUCK_CLIENT_SECRET || '';
     const apiUrl       = process.env.ZUCK_API_URL || 'https://zuckpay.com.br/conta/v3/pix/qrcode';
-    if (!clientId || !clientSecret) return {
-      statusCode: 500,
-      body: JSON.stringify({ error: 'Payment provider credentials not configured' }),
-    };
+    const testMode = process.env.TEST_PAYMENT_MODE === '1' || (!clientId || !clientSecret);
+    if (!clientId || !clientSecret) {
+      if (!testMode) {
+        return {
+          statusCode: 500,
+          body: JSON.stringify({ error: 'Payment provider credentials not configured' }),
+        };
+      }
+    }
     const authHeader   = 'Basic ' + Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
 
     // Sanitiza telefone — remove tudo que não é dígito, garante 10-11 dígitos
@@ -43,45 +48,63 @@ export async function handler(event) {
     try {
       promisseRes = await fetch(apiUrl, {
         method: 'POST',
-        headers: {
-          'Authorization': authHeader,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          valor: numericAmount,
-          nome: data.customerName || 'Cliente',
-          cpf: '12345678909',
-          email: 'cliente@sitegas.com',
-          telefone,
-        }),
-      });
-    } catch (networkErr) {
-      return {
-        statusCode: 502,
-        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
-        body: JSON.stringify({ error: 'Network error contacting ZuckPay' }),
-      };
-    }
+        let tx;
+        if (testMode) {
+          // generate fake transaction for testing/demo
+          const id = 'test-' + Date.now().toString(36) + Math.floor(Math.random()*10000).toString(36);
+          const fakePix = `00020101021226880014br.gov.bcb.pix2568pix.example.com/cob/${id}5204000053039865802BR5924DEMO LDA6005CITY62070503***6304ABCD`;
+          tx = {
+            transactionId: id,
+            status: 'PENDING',
+            amount: numericAmount,
+            pix_code: fakePix,
+            qrcode: fakePix,
+            qrcode_image: '',
+            checkout_url: `https://pix.example.com/checkout?sid=${id}&amount=${numericAmount}`,
+            createdAt: Date.now(),
+          };
+          console.log('[create-pix] Test mode - returning fake tx', id);
+        } else {
+          let promisseRes;
+          try {
+            promisseRes = await fetch(apiUrl, {
+              method: 'POST',
+              headers: { 'Authorization': authHeader, 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                valor: numericAmount,
+                nome: data.customerName || 'Cliente',
+                cpf: '12345678909',
+                email: 'cliente@sitegas.com',
+                telefone,
+              }),
+            });
+          } catch (networkErr) {
+            console.error('[PromissePay] Network error when calling API:', networkErr?.message || networkErr);
+            return res.status(502).json({ error: 'Network error contacting PromissePay' });
+          }
 
-    const text = await promisseRes.text().catch(() => '');
-    let promisseData = {};
-    try { promisseData = JSON.parse(text); } catch {
-      return {
-        statusCode: 502,
-        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
-        body: JSON.stringify({ error: 'Invalid response from ZuckPay', raw: text }),
-      };
-    }
+          const respText = await promisseRes.text().catch(() => '');
+          let promisseData = {};
+          try {
+            promisseData = JSON.parse(respText || '{}');
+          } catch (parseErr) {
+            console.error('[PromissePay] Invalid JSON response:', respText);
+            return res.status(502).json({ error: 'Invalid response from PromissePay', raw: respText });
+          }
 
-    const response = {
-      transactionId: promisseData.transactionId || '',
-      status:        promisseData.status || '',
-      amount:        promisseData.amount || numericAmount,
-      pix_code:      promisseData.pix_code     || promisseData.qrcode || '',
-      qrcode:        promisseData.qrcode       || promisseData.pix_code || '',
-      qrcode_image:  promisseData.qrcode_image || '',
-      checkout_url:  promisseData.checkout_url || '',
-    };
+          console.log('[ZuckPay] API status:', promisseRes.status);
+
+          tx = {
+            transactionId: promisseData.transactionId || '',
+            status:        promisseData.status || '',
+            amount:        promisseData.amount || numericAmount,
+            pix_code:      promisseData.pix_code  || promisseData.qrcode || '',
+            qrcode:        promisseData.qrcode    || promisseData.pix_code || '',
+            qrcode_image:  promisseData.qrcode_image  || '',
+            checkout_url:  promisseData.checkout_url  || '',
+            createdAt: Date.now(),
+          };
+        }
 
     // Persist transaction to Supabase if configured, otherwise fallback to local file (quick mode)
     try {
