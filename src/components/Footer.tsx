@@ -7,23 +7,25 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ onOpenTerms, onOpenPrivacy }) => {
   return (
-    <footer className="bg-white border-t border-slate-100 py-10 text-center text-sm text-slate-500">
-      <div className="flex justify-center items-center gap-4 mb-3 font-bold text-xs uppercase">
+    <footer className="bg-white border-t border-slate-100 py-8 text-center">
+      <div className="flex justify-center items-center gap-4 mb-2">
         <button
           onClick={onOpenTerms}
-          className="hover:text-blue-600 cursor-pointer transition-colors"
+          className="text-xs font-bold text-slate-400 hover:text-blue-600 cursor-pointer transition-colors uppercase tracking-wider"
         >
           Termos de Uso
         </button>
-        <span className="text-slate-300">|</span>
+        <span className="text-slate-200 text-xs">|</span>
         <button
           onClick={onOpenPrivacy}
-          className="hover:text-blue-600 cursor-pointer transition-colors"
+          className="text-xs font-bold text-slate-400 hover:text-blue-600 cursor-pointer transition-colors uppercase tracking-wider"
         >
           Política de Privacidade
         </button>
       </div>
-      <p>© 2026 Água & Gás do Bairro • Todos os direitos reservados</p>
+      <p className="text-xs text-slate-300">
+        © 2026 Ultra Gás & Água • Todos os direitos reservados
+      </p>
     </footer>
   );
 };

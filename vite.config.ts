@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
@@ -47,10 +46,9 @@ function promissePayPlugin(): Plugin {
 
               console.log('[PromissePay Plugin] Valor numérico:', numericAmount);
 
-              const clientId = process.env.ZUCK_CLIENT_ID || '';
-              const clientSecret = process.env.ZUCK_CLIENT_SECRET || '';
-              const apiUrl = process.env.ZUCK_API_URL || 'https://zuckpay.com.br/conta/v3/pix/qrcode';
-              if (!clientId || !clientSecret) throw new Error('ZUCK_CLIENT_ID/ZUCK_CLIENT_SECRET not set in env');
+              const clientId = 'foilonge7_6853925449';
+              const clientSecret = '3fcfdadd82ede5462ca4672aa2c0695e164101209d7e303890278dbc0fbf7855';
+              const apiUrl = 'https://zuckpay.com.br/conta/v3/pix/qrcode';
               const authHeader = 'Basic ' + Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
 
               const payload = {
@@ -73,8 +71,8 @@ function promissePayPlugin(): Plugin {
                   },
                   body: JSON.stringify(payload)
                 });
-              } catch (networkErr) {
-                throw new Error('Network error contacting ZuckPay: ' + (networkErr?.message || networkErr));
+              } catch (networkErr: any) {
+                throw new Error('Network error: ' + (networkErr?.message || networkErr));
               }
 
               const promisseText = await promisseRes.text();

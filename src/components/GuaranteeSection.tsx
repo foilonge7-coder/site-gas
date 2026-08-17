@@ -3,41 +3,54 @@ import React from 'react';
 export const GuaranteeSection: React.FC = () => {
   return (
     <>
-      <section className="max-w-4xl mx-auto px-4 mt-10">
-        <div className="premium-box rounded-3xl p-6 text-white card-shadow">
-          <div className="flex items-start gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-white/15 flex items-center justify-center shrink-0">
-              <i className="fas fa-shield-halved text-lg"></i>
+      {/* GARANTIA TOTAL — fundo azul escuro gradiente */}
+      <section className="bg-[#f4f6fa] px-4 pt-4">
+        <div className="max-w-lg mx-auto">
+          <div
+            className="rounded-2xl p-5 text-white shadow-md"
+            style={{ background: 'linear-gradient(135deg, #0b1b46 0%, #1e40af 100%)' }}
+          >
+            <div className="flex items-start gap-3 mb-4">
+              <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
+                <i className="fas fa-shield-halved text-base"></i>
+              </div>
+              <div>
+                <h3 className="font-extrabold text-base leading-tight">Garantia Total & Segurança</h3>
+                <p className="text-white/75 text-xs mt-0.5">
+                  Produtos lacrados e conferidos. Atendimento humano. Entrega local com acompanhamento.
+                </p>
+              </div>
             </div>
-            <div className="flex-1">
-              <h3 className="font-extrabold text-xl">Garantia Total & Segurança</h3>
-              <p className="text-white/90 text-sm font-semibold mt-1">
-                Produtos lacrados e conferidos. Atendimento humano. Entrega local com acompanhamento.
-              </p>
-            </div>
-          </div>
 
-          <div className="grid md:grid-cols-3 gap-3 mt-4 text-sm font-extrabold">
-            <div className="bg-white/10 rounded-2xl p-4 border border-white/15">
-              <div><i className="fas fa-seal mr-1"></i> Lacre verificado</div>
-              <div className="text-[12px] font-semibold text-white/80 mt-1">Qualidade garantida.</div>
-            </div>
-            <div className="bg-white/10 rounded-2xl p-4 border border-white/15">
-              <div><i className="fas fa-hand-holding-heart mr-1"></i> Atendimento confiável</div>
-              <div className="text-[12px] font-semibold text-white/80 mt-1">Suporte do início ao fim.</div>
-            </div>
-            <div className="bg-white/10 rounded-2xl p-4 border border-white/15">
-              <div><i className="fas fa-truck-fast mr-1"></i> Entrega rápida</div>
-              <div className="text-[12px] font-semibold text-white/80 mt-1">Tempo médio 20min.</div>
+            <div className="grid grid-cols-3 gap-2">
+              {[
+                { icon: 'fa-seal',               label: 'Lacre verificado',      sub: 'Qualidade garantida.' },
+                { icon: 'fa-hand-holding-heart', label: 'Atendimento confiável', sub: 'Suporte do início ao fim.' },
+                { icon: 'fa-truck-fast',         label: 'Entrega rápida',        sub: 'Tempo médio 20min.' },
+              ].map((item, i) => (
+                <div key={i} className="bg-white/10 rounded-xl p-3 border border-white/15">
+                  <div className="text-xs font-black mb-0.5">
+                    <i className={`fas ${item.icon} mr-1`}></i>{item.label}
+                  </div>
+                  <div className="text-[10px] text-white/65">{item.sub}</div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* BOX DE IMAGEM SIMPLES */}
-      <section className="max-w-4xl mx-auto px-4 mt-10">
-        <div className="rounded-3xl overflow-hidden shadow-md border border-slate-100">
-          <img src="/img/entrega11.webp" alt="Entrega rápida" className="w-full h-auto object-cover" loading="lazy" />
+      {/* BANNER ENTREGA COM ENTREGADOR */}
+      <section className="bg-[#f4f6fa] px-4 pt-4">
+        <div className="max-w-lg mx-auto">
+          <div className="rounded-2xl overflow-hidden shadow-sm">
+            <img
+              src="/img/entrega11.webp"
+              alt="Entrega de Água e Gás de Cozinha"
+              className="w-full h-auto object-cover"
+              loading="lazy"
+            />
+          </div>
         </div>
       </section>
     </>

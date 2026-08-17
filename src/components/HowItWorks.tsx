@@ -2,34 +2,30 @@ import React from 'react';
 
 export const HowItWorks: React.FC = () => {
   return (
-    <section className="max-w-4xl mx-auto px-4 mt-10">
-      <div className="bg-white rounded-3xl card-shadow p-6 border border-slate-100">
-        <h3 className="font-extrabold text-lg text-slate-900 mb-4">Como funciona</h3>
-        <div className="grid md:grid-cols-3 gap-3 text-sm">
-          <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4">
-            <div className="font-black text-blue-900 flex items-center gap-1.5">
-              <i className="fas fa-cart-shopping"></i>
-              <span>1) Escolha o pack</span>
-            </div>
-            <div className="text-slate-600 font-semibold text-[12px] mt-1">Selecione o combo ideal.</div>
+    <section className="bg-[#f4f6fa] px-4 pt-4">
+      <div className="max-w-lg mx-auto">
+        <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
+          <h3 className="font-extrabold text-base text-slate-900 mb-4">Como funciona</h3>
+
+          <div className="grid grid-cols-3 gap-3">
+            {[
+              { icon: 'fa-cart-shopping', label: '1) Escolha o pack',       sub: 'Selecione o combo ideal.' },
+              { icon: 'fa-headset',       label: '2) Finalize seu pedido',  sub: 'Finalize sua compra' },
+              { icon: 'fa-truck-fast',    label: '3) Receba em casa',       sub: 'Entrega local e ágil.' },
+            ].map((item, i) => (
+              <div key={i} className="bg-slate-50 border border-slate-100 rounded-xl p-3">
+                <div className="text-blue-700 font-black text-[11px] flex items-start gap-1 mb-1">
+                  <i className={`fas ${item.icon} mt-0.5 flex-shrink-0`}></i>
+                  <span>{item.label}</span>
+                </div>
+                <div className="text-slate-400 text-[10px] font-semibold">{item.sub}</div>
+              </div>
+            ))}
           </div>
-          <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4">
-            <div className="font-black text-blue-900 flex items-center gap-1.5">
-              <i className="fas fa-headset"></i>
-              <span>2) Finalize seu pedido</span>
-            </div>
-            <div className="text-slate-600 font-semibold text-[12px] mt-1">Finalize sua compra</div>
-          </div>
-          <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4">
-            <div className="font-black text-blue-900 flex items-center gap-1.5">
-              <i className="fas fa-truck-fast"></i>
-              <span>3) Receba em casa</span>
-            </div>
-            <div className="text-slate-600 font-semibold text-[12px] mt-1">Entrega local e ágil.</div>
-          </div>
-        </div>
-        <div className="mt-4 text-[12px] text-slate-500 font-semibold">
-          *Atendemos apenas por delivery (entregas locais).
+
+          <p className="mt-3 text-[11px] text-slate-400">
+            *Atendemos apenas por delivery (entregas locais).
+          </p>
         </div>
       </div>
     </section>
